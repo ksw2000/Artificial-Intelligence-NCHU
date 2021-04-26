@@ -1,5 +1,7 @@
 # CH2 Problem solving and search
 
+[toc]
+
 ## Problem Solving
 
 ### Formulating problems
@@ -12,27 +14,7 @@ A problem can be defined formally by 5 components:
 4. The **goal test**, which determines whether a given state is a goal state.
 5. A **path cost** function that assigns a numeric cost to each path. The problem-solving agent choose a cost function that reflects its own performance measure.
 
-*1-3 can implicitly define the **state space***
-
----
-
-> **example 1**
->
-> 8-queens problem: 8個皇后棋擺在棋排上其中一直行與一橫行沒有其他皇后棋，這個問題有兩種 formulation，而這兩種 case 都不考慮 path cost ，因為在這裡我們只在乎終局的數量
->
-> **incremental formulation** involves operators that augment the state description, starting with an empty state
->
-> + **State:** any arrangement of 0 to 8 queens on the board is a state.
-> + **Initial state:** No queens on the board
-> + **Actions:** Add a queen to any empty square.
-> + **Transition model:** Returns the board with a queen added to the specified square
-> + **Goal test:** 8 queens are on the board, none attacked.
-> + **Path cost**: 不考慮
->
-> A **complete-state formulation** starts with all 8 queens on the board and moves them around.
->
-> + **State:** All possible arrangements of $n$ queens ($0\le n\le 8$), one per column in the leftmost $n$ columns, with no queen attacking another.
-> + **Actions:** Add a queen to any square in the leftmost empty column s.t. it is not attacked by any other queen.
+> *1-3 can implicitly define the **state space***
 
 ### Types of Problem
 
@@ -77,30 +59,52 @@ A problem can be defined formally by 5 components:
 
 + Exploration problem (探索性問題)
 
-**Example**
+### Example
 
-1. 掃地機器人問題
+1. 八皇后問題
 
-<img src="./src/2-1.png" style="zoom:50%;" />
+   8-queens problem: 8個皇后棋擺在棋盤上其中一直行與一橫行沒有其他皇后棋，這個問題有兩種 formulation，而這兩種 case 都不考慮 path cost ，因為在這裡我們只在乎終局的數量
 
-+ Single-state: 會有初始狀態做考慮比如第 5 個情況
-+ Multiple-state: 則會從這 8 種情況都進行考慮 (沒有sensor不確定初始狀態)
+   **incremental formulation** involves operators that augment the state description, starting with an empty state
 
-+ Contingency state: There is no action sequence that can be calculated at planning time and is guaranteed to reach the goal state.
+   + **State:** any arrangement of 0 to 8 queens on the board is a state.
+   + **Initial state:** No queens on the board
+   + **Actions:** Add a queen to any empty square.
+   + **Transition model:** Returns the board with a queen added to the specified square
+   + **Goal test:** 8 queens are on the board, none attacked.
+   + **Path cost**: 不考慮
 
-2. 羅馬尼亞旅遊問題
+   A **complete-state formulation** starts with all 8 queens on the board and moves them around.
+
+   + **State:** All possible arrangements of $n$ queens ($0\le n\le 8$), one per column in the leftmost $n$ columns, with no queen attacking another.
+   + **Actions:** Add a queen to any square in the leftmost empty column s.t. it is not attacked by any other queen.
+
+2. 掃地機器人問題
+
+   + **State:** The state is determined by both the agent location and the agent is in one of two locations. i.e., 8 possible world states.
+   + **Initial state:** Any state can be designed as the initial state.
+   + **Actions:** In this simple environment, each state has just 3 actions: *Left*, *Right*, and *Suck*. Larger environments might also include *Up* and *Down* 
+   + **Transition model:** The actions have their expected effects, expect that moving *Left* in the leftmost square, moving *Right* in the rightmost square, and *Sucking* in a clean square have no effect.
+   + **Goal test:** This checks whether all the squares are clean.
+   + **Path cost:** Each step costs 1, so the path cost is the number of steps in the path.
+
+   + Single-state problem: 會有初始狀態做考慮比如第 5 個情況
+   + Multiple-state problem: 則會從這 8 種情況都進行考慮 (沒有sensor不確定初始狀態)
+   + Contingency state problem: There is no action sequence that can be calculated at planning time and is guaranteed to reach the goal state.
+
+   <img src="./src/2-1.png" style="zoom:50%;" />
+
+3. 羅馬尼亞旅遊問題
+
+   + Scenario: On holiday in Romania; currently in Arad Flight leaves tomorrow from Bucharest
+   + Goal: Be in Bucharest
+   + Formulate problem: 
+     + **States:** various cities 
+     + **Actions:** drive between cities
+   + Solution Appropriate sequence of cities
+     + e.g., Arad, Sibiu, Fagaras, Bucharest
 
 ![](./src/2-2.png)
-
-+ Scenario: On holiday in Romania; currently in Arad Flight leaves tomorrow from Bucharest
-
-+ Goal: Be in Bucharest
-
-+ Formulate problem: 
-  + States: various cities 
-  + Actions: drive between cities
-+ Solution Appropriate sequence of cities 
-  + e.g., Arad, Sibiu, Fagaras, Bucharest
 
 *Reference:*
 
@@ -141,9 +145,10 @@ A problem can be defined formally by 5 components:
 
 **little Oh**
 $$
-o(g(n)):\{f(n)\ |\ \forall c>0, \exist k>0\ and\ k<= n\ s.t.\ 0<=f(n)<cg(n)\}
+o(g(n)):\{f(n)\ |\ \forall c>0, \exist k>0\ and\ k\le n\ s.t.\ 0\le f(n)\textcolor{blue}<cg(n)\}
 $$
 **big Oh**
 $$
-O(g(n)):\{f(n)\ |\ \forall c>0, \exist k>0\ and\ k<= n\ s.t.\ 0<=f(n)<=cg(n)\}
+O(g(n)):\{f(n)\ |\ \forall c>0, \exist k>0\ and\ k\le n\ s.t.\ 0 \le f(n)\textcolor{blue}{\le}cg(n)\}
 $$
+
