@@ -46,7 +46,7 @@ A rational agent is one that does the right thing. 台大于天立：比如一�
 
 ![Agent](./src/agent.png)
 
-### How is an Agent different from other software?
+### How is an Agent Different from Other Software?
 
 + Agents are autonomous, i,e,. they act on behalf of the user
 
@@ -68,7 +68,7 @@ Agent program: the implementation of $f: P^*→A$
 
 ### Agent Types
 
-+ Simple Reflex agents
++ Simple reflex agents
 
   Knowing about the current state of the environment
 
@@ -97,3 +97,33 @@ Agent program: the implementation of $f: P^*→A$
 **reference **
 
 + [Agents in Artificial Intelligence - Geeks](https://www.geeksforgeeks.org/agents-artificial-intelligence/)
+
+## Omniscience
+
+An omniscience (全知) agent knows the actual outcome of its actions and can act accordingly; but omniscience impossible in reality. 
+
+Our definition of a rationality does not require omniscience, then, because the rational choice depends only on the percept sequence to date.
+
+## Properties of Task Environments
+
+### Fully observable v.s. partially observable
+
+If an agent's sensors give it access to the complete state of the environment at each point in time, then we say that the task environment is fully observable.
+
+An environment might be partially observable because of noisy and inaccurate sensors or because parts of the state are simply missing from the sensor data.
+
+If the agent has no sensors at all then the environment is unobservable.
+
+### Deterministic v.s. stochastic
+
+If the next state of the environment is completely determined by the current state and the action executed by the agent, then we say the environment is deterministic; otherwise, it is stochastic
+
+If the environment is partially observable, however, then it could appear to be stochastic.
+
+### Episodic v.s. sequential
+
+In an episodic task environment, the agent's experience is divided into atomic episodes. The next episode does not depend on the actions taken in previous episodes. Many classification tasks are episodic.
+
+### Static v.s. dynamic
+
+If the environment can change while an agent is deliberation, then we say the environment is dynamic for that agent' otherwise, it is static.
